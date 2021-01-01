@@ -1,0 +1,4 @@
+{
+    "webrtcip":"http://raspberrypi:8888/",
+    "socketip":"http://localhost:4000"
+}

@@ -3,20 +3,27 @@ import './App.css';
 import Navbar from './components/Navbar'
 import Video from './components/Video'
 import SideBand from './components/Sidebar'
+// import SimpleMap from './components/Map'
 import MapContainer from './components/Maps'
 import io from 'socket.io-client'
 
-let socket = io(`http://localhost:4000`)
+
+
+
+let socket = 'http://localhost:4000'
+// let socket = io(config.get('socketip'))
  
 class App extends Component{
 
+  
   state = {
     showType: 'WebRTC',
     user: [],
     imagesrc: 'z',
     arduinores: '',
-    lat: '',
-    long: ''
+    co: {},
+    lat:"",
+    lng:""
   }
 
   //Choosing between WebRTC or Websockets
@@ -53,17 +60,30 @@ class App extends Component{
     
     socket.on(`arduinores`, op => {
       console.log('in camera response')
-      if(op!="")
+      if(op!=="")
       {
         this.setState({arduinores:`${op}`})
       }
     })
     
     socket.on('gpsc', (lat, long) => {
-      if(lat!="")
+      if(lat!=="")
       {
+        var co = {}
+        //lat = parseInt(lat.substring(0,2)) + parseInt(lat.substring(2,4))/60 + parseInt(lat.substring(5, lat.length))/(60*60)
+        //long = parseInt(long.substring(0,3)) + parseInt(long.substring(3,4))/60 + parseInt(long.substring(6, long.length))/(60*60)
+        //console.log(lat, long)
+  
+        
+        
+        co = {
+          lat: lat,
+          lng: long
+        }
+        this.setState({co:`${co}`})
         this.setState({lat:`${lat}`})
-        this.setState({long:`${long}`})
+        this.setState({lng:`${long}`})
+       
       }
     })
   }
@@ -113,7 +133,8 @@ class App extends Component{
                       <button className="btn btn-info" onClick={()=>this.handleGPS(6)}><i className="fa fa-repeat"></i></button><br/>
                     </span>
                   </h1>
-                  <MapContainer lat={this.state.lat} long={this.state.long}/>
+                 
+                  <MapContainer co={this.state.co} lng={this.state.lng} lat={this.state.lat} />
                 </div>
 
               </div>

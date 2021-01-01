@@ -13,3 +13,7 @@ div.container-fluid{
 .optionsbtn{
 	width: 15vw;
 }
+
+data-reactroot{
+   font-size: 16px;
+}

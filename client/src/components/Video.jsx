@@ -14,7 +14,7 @@ class Video extends Component {
                 <h1 style={{ marginTop: "2vh"}}>Makerspace RPi Camera </h1>
                
                 <div>
-                    {this.props.value == "WebRTC"
+                    {this.props.value === "WebRTC"
                         ? <WebRTC onClick={this.handleChange}/>
                         : <Websockets onClick={this.handleChange}  imagesrc={this.props.imagesrc}/>
                     }
