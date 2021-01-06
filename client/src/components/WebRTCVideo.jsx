@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Video.css'
-const config = require('config')
 
-console.log(process.env.webrtcip)
+
+
 class WebRTC extends Component {
     render() {
         return (
@@ -10,7 +10,7 @@ class WebRTC extends Component {
                 <h1>WebRTC</h1>
                
 
-                    <iframe title="iframe src" src={'http://raspberrypi:8888/'} height='600px' width='810px' frameBorder='0'></iframe>
+                    <iframe title="iframe src" src={'http://raspberrypi:8888/'} height='800px' width='840px' frameBorder='0'></iframe>
  
                 </div>
         );

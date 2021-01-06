@@ -66,12 +66,13 @@ export class App extends Component{
     
     socket.on('gpsc', (lat, long) => {
 
-    
+    console.log(long)
       if(lat!=="")
       {
         var co = {}
+        
         lat = parseInt(lat.substring(0,2)) + parseFloat(lat.substring(2,lat.length))/(60)
-        long = parseInt(long.substring(0,3)) + parseFloat(long.substring(3,long.length))/(60)
+        //long = parseInt(long.substring(0,3)) + parseFloat(long.substring(3,long.length))/(60)
         console.log(lat, long)
         
         co = {
@@ -132,7 +133,7 @@ export class App extends Component{
                       <button className="btn btn-info" onClick={()=>this.handleGPS(6)}><i className="fa fa-repeat"></i></button><br/>
                     </span>
                   </h1>
-                  <p>clieck on refresh and then click on map to get updated coordinates</p>
+                  <p>clieck on refresh and then click on map to get updated coordinates. {this.state.lat} {this.state.lng}</p>
                  <MapContainer co={this.state.co} lng={this.state.lng} lat={this.state.lat} />
 
                 </div>
