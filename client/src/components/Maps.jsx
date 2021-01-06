@@ -6,14 +6,21 @@ const mapStyles = {
   height: '40vh'
 };
 
+//50.91724476666667 11.568059816666667
 export class MapContainer extends Component {
     state = {
+        currentCenter: {
+          lat:'',
+          lng:''
+        },
         showingInfoWindow: false,  // Hides or shows the InfoWindow
         activeMarker: {},          // Shows the active marker upon click
         selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
       };
-      onMarkerClick = (props, marker, e) =>
-    this.setState({
+
+
+  onMarkerClick = (props, marker, e) =>
+      this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
@@ -27,23 +34,37 @@ export class MapContainer extends Component {
       });
     }
   };
+
+ 
+  handleMapClick= () => {
+    let co = {}
+    co = {
+      lat:this.props.lat,
+      lng:this.props.lng
+    }
+    this.setState({ currentCenter: co });
+  };
+
   render() {
+
     return (
+      
       <Map
         google={this.props.google}
         zoom={14}
         style={mapStyles}
-        initialCenter={
-          {
-            lat: this.props.lat,
-            lng: this.props.long
-          }
-        }
+        key={this.props.lng}
+        center={this.state.currentCenter}
+        onClick={this.handleMapClick}
+        initialCenter = {this.state.currentCenter}
+        places={this.state.markers}
       >
-          <Marker
+  
+        <Marker position={{ lat: this.state.currentCenter.lat, lng: this.state.currentCenter.lng }}
           onClick={this.onMarkerClick}
-          name={'Kenyatta International Convention Centre'}
+          name={`lat: ${this.state.currentCenter.lat.substring(0,7)}, lng: ${this.state.currentCenter.lng.substring(0,7)}`}
         />
+
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}

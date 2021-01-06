@@ -5,18 +5,17 @@ import Video from './components/Video'
 import SideBand from './components/Sidebar'
 import MapContainer from './components/Maps'
 import io from 'socket.io-client'
-
-let socket = io(`http://localhost:4000`)
+let socket = io(`http://raspberrypi:4000`)
  
-class App extends Component{
+export class App extends Component{
 
   state = {
     showType: 'WebRTC',
     user: [],
     imagesrc: 'z',
     arduinores: '',
-    lat: '',
-    long: ''
+    lat:"",
+    lng:""
   }
 
   //Choosing between WebRTC or Websockets
@@ -53,6 +52,7 @@ class App extends Component{
     
     socket.on(`arduinores`, op => {
       console.log('in camera response')
+      console.log(op)
       if(op!="")
       {
         this.setState({arduinores:`${op}`})
@@ -60,11 +60,20 @@ class App extends Component{
     })
     
     socket.on('gpsc', (lat, long) => {
-      if(lat!="")
+    
+      if(lat!=="")
       {
+        var co = {}
+        lat = parseInt(lat.substring(0,2)) + parseFloat(lat.substring(2,lat.length))/(60)
+        long = parseInt(long.substring(0,3)) + parseFloat(long.substring(3,long.length))/(60)
+        console.log(lat, long)
+  
+       
         this.setState({lat:`${lat}`})
-        this.setState({long:`${long}`})
+        this.setState({lng:`${long}`})
+       
       }
+      
     })
   }
 
@@ -90,7 +99,7 @@ class App extends Component{
                 <div className="container">
                   <h1 style={{textAlign:"center", marginTop: "2vh"}}>Camera Movement</h1>
                   <div style={{textAlign:"center"}}>           
-                    <button className="btn btn-info" onClick = {() => this.handleCameraMovement(5)}>UP</button>&nbsp;&nbsp;&nbsp;
+                    <button className="btn btn-info" onClick = {() => this.handleCameraMovement(5)}>Up</button>&nbsp;&nbsp;&nbsp;
                     <button className="btn btn-info" onClick = {()=>this.handleCameraMovement(6)}>Down</button>
                   </div> 
                 </div>
@@ -113,7 +122,8 @@ class App extends Component{
                       <button className="btn btn-info" onClick={()=>this.handleGPS(6)}><i className="fa fa-repeat"></i></button><br/>
                     </span>
                   </h1>
-                  <MapContainer lat={this.state.lat} long={this.state.long}/>
+                  <p>clieck on refresh and then click on map to get updated coordinates</p>
+                 <MapContainer co={this.state.co} lng={this.state.lng} lat={this.state.lat} />
                 </div>
 
               </div>
@@ -125,5 +135,6 @@ class App extends Component{
   }
 }
 
-export default App;
 
+
+export default App;

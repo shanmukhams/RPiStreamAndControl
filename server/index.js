@@ -12,12 +12,13 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 const server = http.createServer(app)
 app.use(cors());
+
 const io = socketio(server);
 
 const Readline = require('@serialport/parser-readline');
 const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
 const gpsport = new SerialPort('/dev/ttyUSB0', { baudRate: 115200 });
-const parser = port.pipe(new Readline({ }));
+
 
 port.on("open", () => {
     console.log('Arduino: serial port open');
@@ -48,12 +49,21 @@ io.on('connect', (socket) => {
 
             console.log('message written');
             
+            
             op=""
+           
+            
             
             port.on('data', function(data) {
                 op+=data.toString();
-                socket.emit('arduinores', data)
+                
             });
+            setTimeout(()=>{
+                socket.emit('arduinores', op)
+                op = ""
+                
+                },1000); 
+                op = ""
          });
     })
     
@@ -64,6 +74,7 @@ io.on('connect', (socket) => {
         gpsport.write('\r');
         gpsport.on('data', function(data) {
             alist = data.toString().split(pat)
+            
             console.log("Received data: " + alist[1],alist[2]);
             socket.emit('gpsc',alist[1],alist[2])
         });
@@ -71,6 +82,7 @@ io.on('connect', (socket) => {
 
     socket.on('imagedata', (data)=>{
         
+        a = 1
         console.log('imagedata '+data)
         
         if(pv == data){
@@ -83,9 +95,14 @@ io.on('connect', (socket) => {
 			  .then((result) => {
 				// Your picture was captured
 				const image = result.toString('base64');
+                a+=1
+                console.log(a)
+                console.log(pv)
+				console.log(image.substring(0,8))
 				socket.emit('image', image)
                  if(pv!="Websockets"){
-                    console.log("closing....")
+                     a=1
+                     console.log("closing....")
                     clearInterval(refreshIntervalId);
                 }
 			  })
@@ -94,6 +111,7 @@ io.on('connect', (socket) => {
 			  });
             }, 1000/FPS)
         }
+        
         
     })
     
