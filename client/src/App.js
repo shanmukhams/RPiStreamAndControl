@@ -3,17 +3,22 @@ import './App.css';
 import Navbar from './components/Navbar'
 import Video from './components/Video'
 import SideBand from './components/Sidebar'
+// import SimpleMap from './components/Map'
 import MapContainer from './components/Maps'
 import io from 'socket.io-client'
+
 let socket = io(`http://raspberrypi:4000`)
+
  
 export class App extends Component{
 
+  
   state = {
     showType: 'WebRTC',
     user: [],
     imagesrc: 'z',
     arduinores: '',
+    co: {},
     lat:"",
     lng:""
   }
@@ -52,14 +57,15 @@ export class App extends Component{
     
     socket.on(`arduinores`, op => {
       console.log('in camera response')
-      console.log(op)
       if(op!="")
+
       {
         this.setState({arduinores:`${op}`})
       }
     })
     
     socket.on('gpsc', (lat, long) => {
+
     
       if(lat!=="")
       {
@@ -67,8 +73,12 @@ export class App extends Component{
         lat = parseInt(lat.substring(0,2)) + parseFloat(lat.substring(2,lat.length))/(60)
         long = parseInt(long.substring(0,3)) + parseFloat(long.substring(3,long.length))/(60)
         console.log(lat, long)
-  
-       
+        
+        co = {
+          lat: lat,
+          lng: long
+        }
+        this.setState({co:`${co}`})
         this.setState({lat:`${lat}`})
         this.setState({lng:`${long}`})
        
@@ -124,6 +134,7 @@ export class App extends Component{
                   </h1>
                   <p>clieck on refresh and then click on map to get updated coordinates</p>
                  <MapContainer co={this.state.co} lng={this.state.lng} lat={this.state.lat} />
+
                 </div>
 
               </div>

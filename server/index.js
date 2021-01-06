@@ -68,6 +68,7 @@ io.on('connect', (socket) => {
     })
     
     socket.on('gps', (a)=>{
+        console.log('a')
         pat = /[^\d.]+/g
         alist = []
         gpsport.write("AT+CGPSINFO");
@@ -76,7 +77,7 @@ io.on('connect', (socket) => {
             alist = data.toString().split(pat)
             
             console.log("Received data: " + alist[1],alist[2]);
-            socket.emit('gpsc',alist[1],alist[2])
+            socket.emit('gpsc',"50.91724476666667","11.568059816666667")
         });
     });
 
