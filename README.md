@@ -28,7 +28,9 @@ Steps:
  ```
    
    
-####Installing UV4L and WebRTC support (credits: reef nerd: https://www.youtube.com/watch?v=5QAHlZoPlgI&feature=emb_title)
+###### Installing UV4L and WebRTC support 
+(credits: reef nerd: https://www.youtube.com/watch?v=5QAHlZoPlgI&feature=emb_title)
+ ```
         i.    SSH into your Raspberry Pi
                 o curl http://www.linux-projects.org/listing/uv4l_repo/lpkey.asc | sudo apt-key add –
                 o cd
@@ -92,13 +94,13 @@ Steps:
                     o cd reefcam
                     o sudo wget https://github.com/MulletBoy/Raspberry-Pi-FishCam-DemoSite/archive/master.zip
                     o sudo unzip -j master.zip
-                    
-        In your web-browser now to 192.168.1.7:8888 with your IP Raspberry Pi’s address and noting the 8888 port location instead of the 8080 we went to before
-          • You should see the ReefCam website.
-          • Test it by starting the steaming.
-          • Then click stop streaming.
+ ```               
+ In your web-browser now to 192.168.1.7:8888 with your IP Raspberry Pi’s address and noting the 8888 port location instead of the 8080 we went to before
+ 
+   • You should see the ReefCam website.
+   • Test it by starting the steaming.
+   • Then click stop streaming.
      
-     d. node server
-     
+ 
         
    
