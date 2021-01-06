@@ -8,10 +8,14 @@ Steps:
 1. git clone https://github.com/shanmukhams/RPiStreamAndControl.git
 
 2. to run client:
+
+```
     cd client
     npm i
     npm start
     http://<ip>:3000
+```
+
     
 2. to run server:
     a. cd server
