@@ -17,9 +17,11 @@ Steps:
 ```
 
     
-2. to run server:
-    a. cd server
-    b. npm i
+3. to run server:
+```
+    cd server
+    npm i
+```
     c. Installing UV4L and WebRTC support (credits: reef nerd: https://www.youtube.com/watch?v=5QAHlZoPlgI&feature=emb_title)
         i.    SSH into your Raspberry Pi
                 o curl http://www.linux-projects.org/listing/uv4l_repo/lpkey.asc | sudo apt-key add –
