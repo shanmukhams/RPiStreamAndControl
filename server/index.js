@@ -77,7 +77,7 @@ io.on('connect', (socket) => {
             alist = data.toString().split(pat)
             
             console.log("Received data: " + alist[1],alist[2]);
-            socket.emit('gpsc',"50.91724476666667","11.568059816666667")
+            socket.emit('gpsc',alist[1], alist[2])
         });
     });
 

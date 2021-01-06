@@ -72,7 +72,7 @@ export class App extends Component{
         var co = {}
         
         lat = parseInt(lat.substring(0,2)) + parseFloat(lat.substring(2,lat.length))/(60)
-        //long = parseInt(long.substring(0,3)) + parseFloat(long.substring(3,long.length))/(60)
+        long = parseInt(long.substring(0,3)) + parseFloat(long.substring(3,long.length))/(60)
         console.log(lat, long)
         
         co = {
