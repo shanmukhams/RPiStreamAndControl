@@ -22,7 +22,13 @@ Steps:
     cd server
     npm i
 ```
-    c. Installing UV4L and WebRTC support (credits: reef nerd: https://www.youtube.com/watch?v=5QAHlZoPlgI&feature=emb_title)
+   Install UV4L and WebRTC (Instructions are given below and credits: https://www.youtube.com/watch?v=5QAHlZoPlgI&feature=emb_title)
+ ```
+    node server.js
+ ```
+   
+   
+####Installing UV4L and WebRTC support (credits: reef nerd: https://www.youtube.com/watch?v=5QAHlZoPlgI&feature=emb_title)
         i.    SSH into your Raspberry Pi
                 o curl http://www.linux-projects.org/listing/uv4l_repo/lpkey.asc | sudo apt-key add –
                 o cd
