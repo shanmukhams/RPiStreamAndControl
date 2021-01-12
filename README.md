@@ -105,4 +105,4 @@ Steps:
      
  
         
-   
+Note: in order to use Google Maps, we need Google API Key in client/src/components/Maps.jsx
