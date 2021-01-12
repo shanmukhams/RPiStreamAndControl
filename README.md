@@ -93,6 +93,10 @@ Steps:
                     o sudo mkdir reefcam
                     o cd reefcam
                     o sudo wget https://github.com/MulletBoy/Raspberry-Pi-FishCam-DemoSite/archive/master.zip
+                    
+                                                             or
+                    
+                      sudo wget https://github.com/shanmukhams/RaspberryPi-Camera-Webrtc/archive/main.zip
                     o sudo unzip -j master.zip
  ```               
  In your web-browser now to 192.168.1.7:8888 with your IP Raspberry Pi’s address and noting the 8888 port location instead of the 8080 we went to before
