@@ -80,6 +80,6 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBSYJZ0XporUIvDRy-AM99I5H94DdpUgCQ'
+  apiKey: '<appid>'
 })(MapContainer);
 
